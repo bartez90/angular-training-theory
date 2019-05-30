@@ -19,6 +19,7 @@ export class TasksListComponent implements OnInit {
     day = 'Today';
     canAddTask = false;
     maxTasks = 4;
+    fontStyle = 'italic';
 
     constructor() { }
 
@@ -38,6 +39,10 @@ export class TasksListComponent implements OnInit {
 
     checkInput(e) {
         this.canAddTask = e.target.value ? true : false;
+    }
+
+    getColor(): string {
+        return this.tasks.length < 4 ? 'blue' : 'red';
     }
 
 }

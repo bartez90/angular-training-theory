@@ -5,14 +5,19 @@
     <div>
         Tasks list:
         <ul class="list">
-            <li>task 1</li>
-            <li>task 2</li>
+            <li *ngFor="let task of tasks; let i = index" [ngClass]="{'list-background': !(i % 2)}" >{{ task }}</li>
         </ul>
     </div>
-    <div>
+    <div *ngIf="tasks.length < maxTasks else limitReached">
         <input #newTaskInput (keyup)="checkInput($event)" type="text" placeholder="New Task">
         <button [disabled]="!canAddTask" class="btn" (click)="addTask(newTaskInput)">Add task</button>
     </div>
-    <p>You've reached task limit!</p>
+    <!-- <ng-template [ngIf]="tasks.length < maxTasks">
+        <input #newTaskInput (keyup)="checkInput($event)" type="text" placeholder="New Task">
+        <button [disabled]="!canAddTask" class="btn" (click)="addTask(newTaskInput)">Add task</button>
+    </ng-template> -->
+    <ng-template #limitReached>
+        <p [ngStyle]="{'font-style': fontStyle, 'color': getColor()}">You've reached task limit!</p>
+    </ng-template>
     <p>Selected task</p>
 </div>
