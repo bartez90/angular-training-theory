@@ -1,11 +1,11 @@
 <div class="main-box">
-    <h2 class="heading">{{ getDay(day) }} you will do {{ maxTasks }} tasks</h2>
+    <h2 appHighlight>{{ getDay(day) }} you will do {{ maxTasks }} tasks</h2>
     <label for="max-tasks">Max tasks today: </label>
     <input [(ngModel)]="maxTasks" type="number" id="max-tasks">
     <div>
         Tasks list:
         <ul class="list">
-            <li *ngFor="let task of tasks; let i = index" [ngClass]="{'list-background': !(i % 2)}" >
+            <li appHighlight highlightColor="lightblue" *ngFor="let task of tasks; let i = index" [ngClass]="{'list-background': !(i % 2)}" >
                 <app-task-item [task]="task" (taskTextClicked)="onTaskSelect($event)">
                     <div #content>additional content {{ ' ' + i }}</div>
                 </app-task-item>

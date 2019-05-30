@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { TaskItemComponent } from './tasks-list/task-item/task-item.component';
+import { HighlightDirective } from './common/highlight.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     TasksListComponent,
-    TaskItemComponent
+    TaskItemComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
