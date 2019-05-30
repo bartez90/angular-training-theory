@@ -27,4 +27,8 @@ input {
     &:active {
         transform: translateY(-3px);
     }
+
+    &:disabled {
+        opacity: 0.5;
+    }
 }
