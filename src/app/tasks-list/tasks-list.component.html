@@ -5,7 +5,11 @@
     <div>
         Tasks list:
         <ul class="list">
-            <li *ngFor="let task of tasks; let i = index" [ngClass]="{'list-background': !(i % 2)}" >{{ task }}</li>
+            <li *ngFor="let task of tasks; let i = index" [ngClass]="{'list-background': !(i % 2)}" >
+                <app-task-item [task]="task" (taskTextClicked)="onTaskSelect($event)">
+                    <div #content>additional content {{ ' ' + i }}</div>
+                </app-task-item>
+            </li>
         </ul>
     </div>
     <div *ngIf="tasks.length < maxTasks else limitReached">
@@ -19,5 +23,5 @@
     <ng-template #limitReached>
         <p [ngStyle]="{'font-style': fontStyle, 'color': getColor()}">You've reached task limit!</p>
     </ng-template>
-    <p>Selected task</p>
+    <p>{{ selectedTaskText }}</p>
 </div>

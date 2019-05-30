@@ -20,6 +20,7 @@ export class TasksListComponent implements OnInit {
     canAddTask = false;
     maxTasks = 4;
     fontStyle = 'italic';
+    selectedTaskText: string;
 
     constructor() { }
 
@@ -43,6 +44,10 @@ export class TasksListComponent implements OnInit {
 
     getColor(): string {
         return this.tasks.length < 4 ? 'blue' : 'red';
+    }
+
+    onTaskSelect(task: string) {
+        this.selectedTaskText = task;
     }
 
 }
