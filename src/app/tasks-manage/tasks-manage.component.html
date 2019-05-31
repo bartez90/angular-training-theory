@@ -1,0 +1,19 @@
+<div class="tasks-manage">
+    <div class="list-box">
+        <ul class="list-box-list">
+            <li 
+                appHighlight 
+                highlightColor="lightblue" 
+                (click)="onTaskSelect()"
+                *ngFor="let task of tasks" 
+                class="list-box-list-item">
+                {{ task }}
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="taskSelected" class="navbar">
+        <a class="navbar-link" routerLinkActive="navbar-link-active" [routerLink]="['1', 'view']">View</a>
+        <a class="navbar-link" routerLinkActive="navbar-link-active" [routerLink]="['/tasks-manage', '4', 'edit']">Edit</a>
+    </div>
+    <router-outlet></router-outlet>
+</div>

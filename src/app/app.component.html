@@ -1,2 +1,17 @@
-<app-tasks-list></app-tasks-list>
+<div class="navbar">
+    <a 
+        class="navbar-link" 
+        routerLinkActive="navbar-link-active"
+        [routerLinkActiveOptions]="{exact: true}"
+        routerLink="">
+        Add
+    </a>
+    <a class="navbar-link" routerLinkActive="navbar-link-active" routerLink="tasks-manage">Manage</a>
+</div>
+
+<!-- <app-tasks-list></app-tasks-list> -->
+<!-- <app-tasks-manage></app-tasks-manage> -->
+<router-outlet></router-outlet>
+
+
 
