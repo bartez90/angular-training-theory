@@ -10,6 +10,7 @@ import { HighlightDirective } from './common/highlight.directive';
 import { TasksManageComponent } from './tasks-manage/tasks-manage.component';
 import { TaskViewComponent } from './tasks-manage/task-view/task-view.component';
 import { TaskEditComponent } from './tasks-manage/task-edit/task-edit.component';
+import { TasksService } from './common/tasks.service';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { TaskEditComponent } from './tasks-manage/task-edit/task-edit.component'
         FormsModule,
         AppRoutingModule
     ],
-    providers: [],
+    providers: [TasksService],
     bootstrap: [AppComponent]
 })
 

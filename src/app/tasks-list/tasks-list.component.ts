@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { TasksService } from '../common/tasks.service';
+import { Task } from '../common/task.model';
+import { Subscription } from 'rxjs';
 
 // @Component({
 //     selector: 'app-tasks-list',
@@ -13,29 +16,39 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
     styleUrls: ['./tasks-list.component.scss']
 })
 
-export class TasksListComponent implements OnInit {
+export class TasksListComponent implements OnInit, OnDestroy {
     // @ViewChild('newTaskInput') newTaskInput: ElementRef;
-    tasks: string[] = [];
+    tasks: Task[] = [];
     day = 'Today';
     canAddTask = false;
     maxTasks = 4;
     fontStyle = 'italic';
     selectedTaskText: string;
+    sub: Subscription;
 
-    constructor() { }
+    constructor(private tasksService: TasksService) { }
 
     ngOnInit() {
+        // this.tasks = this.tasksService.getTasks();
+        this.tasks = this.tasksService.getTasks();
+
+        this.sub = this.tasksService.tasksChanged.subscribe(
+            (tasks: Task[]) => this.tasks = tasks
+            // (error: Error) => console.log(error)
+        );
     }
 
     getDay(day: string): string {
         return day;
     }
 
+    // addTask(newTaskInput: HTMLInputElement) {
+    //     // const task = this.newTaskInput.nativeElement.value;
+    //     const task = newTaskInput.value;
+    //     this.tasks.push(task);
+    // }
     addTask(newTaskInput: HTMLInputElement) {
-        // const task = this.newTaskInput.nativeElement.value;
-        const task = newTaskInput.value;
-        this.tasks.push(task);
-        console.log(this.tasks);
+        this.tasksService.addTask(newTaskInput.value);
     }
 
     checkInput(e) {
@@ -48,6 +61,10 @@ export class TasksListComponent implements OnInit {
 
     onTaskSelect(task: string) {
         this.selectedTaskText = task;
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 
 }

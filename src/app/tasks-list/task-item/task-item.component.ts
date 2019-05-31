@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, ContentChild, ElementRef } from '@angular/core';
+import { Task } from 'src/app/common/task.model';
 
 @Component({
     selector: 'app-task-item',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input, EventEmitter, Output, ContentChild, ElementRe
 })
 export class TaskItemComponent implements OnInit {
     @ContentChild('content') content: ElementRef;
-    @Input() task: string;
+    @Input() task: Task;
     @Output() taskTextClicked = new EventEmitter<string>();
 
     constructor() { }
@@ -16,7 +17,7 @@ export class TaskItemComponent implements OnInit {
     }
 
     onTaskTextClick() {
-        const text = this.task + ' ' + this.content.nativeElement.innerText;
+        const text = this.task.name + ' ' + this.content.nativeElement.innerText;
         this.taskTextClicked.emit(text);
     }
 

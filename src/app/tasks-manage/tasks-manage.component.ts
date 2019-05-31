@@ -1,26 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TasksService } from '../common/tasks.service';
+import { Task } from '../common/task.model';
 
 @Component({
     selector: 'app-tasks-manage',
     templateUrl: './tasks-manage.component.html',
-    styleUrls: ['./tasks-manage.component.scss']
+    styleUrls: ['./tasks-manage.component.scss'],
+    // providers: [TasksService]
 })
 export class TasksManageComponent implements OnInit {
-    tasks: string[] = ['task 1', 'task 2'];
+    tasks: Task[] = [];
     taskSelected = false;
+    selectedTask: Task;
 
     constructor(
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private tasksService: TasksService
     ) { }
 
     ngOnInit() {
+        this.tasks = this.tasksService.getTasks();
     }
 
-    onTaskSelect() {
+    onTaskSelect(task: Task) {
         this.taskSelected = true;
-        this.router.navigate(['2', 'view'], {relativeTo: this.route});
+        this.selectedTask = task;
+
+        this.router.navigate([task.id, 'view'], {relativeTo: this.route});
         // this.router.navigate(['/tasks-manage', '2', 'view']);
     }
 
